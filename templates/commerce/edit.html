@@ -1,0 +1,46 @@
+{% extends 'base/base.html' %}
+
+{% load crispy_forms_tags %}
+
+
+{% block body %}
+
+<div class="container">
+
+
+
+
+
+        <div class="row">
+
+                <div class="col-sm-12">
+                
+                <form  method="Post" enctype="multipart/form-data"  >
+
+                    {% csrf_token %}
+
+                    {{form.as_p}}
+
+                    <input style="border-radius: 10%"  type="submit" value="Submit" class="btn btn-success">
+
+                </form>
+                
+                
+                
+                
+                </div>
+                
+                
+                
+                
+                </div>
+                
+
+
+
+
+
+</div>
+
+
+{% endblock %}

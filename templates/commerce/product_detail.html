@@ -1,0 +1,182 @@
+{% extends 'base/base.html' %}
+{% load static %}
+
+{% block body %}
+
+<style>
+
+    img {
+        transition:transform 0.25s ease;
+    }
+    
+    img:hover {
+        -webkit-transform:scale(1.5); /* or some other value */
+        transform:scale(1.5);
+        margin: 20px 0px;
+        
+        
+    }
+
+    
+
+</style>
+
+
+
+
+<div class="container">
+
+    <h1 style='text-align:center' >{{product.title}}</h1>
+
+   
+    <br>
+<div  class="row">
+       
+<div  class="col-sm-4 ">
+   {% if product.image %}
+    <img  class="card-img-top" src="{{product.image.url}}" alt="Card image cap">
+   
+   {% endif %}
+    <br><br>
+
+            {% if product.image2 %}
+            <img class="card-img-top" src="{{product.image2.url}}" alt="Card image cap">
+           
+           {% endif %}
+            
+           <h2>Specifations</h2>
+
+           <ul>
+
+            <li>
+
+                Ram:8 Gb
+
+
+            </li>
+
+            <li>
+
+                Weight:1.2 kg
+
+            </li>
+
+            <li>
+
+                Color:Dark-Red
+
+            </li>
+
+
+
+           </ul>
+
+        </div>  
+
+       
+
+        
+
+
+<div class="col-sm-8">
+
+        <div class="row">
+
+                <div style="text-align: center" class="col-sm-3 col-auto mr-auto ">
+        
+        
+                        <h6 class="alert alert-info" >{{product.price}} $ </h6>
+                    
+                        
+                    
+                    </div>
+        
+                <div class="col-auto">
+                        {% if user.is_authenticated and user == product.author %}
+                         <a href='{% url "shop:delete" product.slug %}' class="alert alert-danger">Delete</a><br><br>
+                         <a href='{% url "shop:edit" product.slug %}' class="alert alert-primary">Edit</a><br><br>
+
+                        {% endif %}
+                        <h6 style="text-align: right">Created By {{product.author}}</h6>
+
+
+
+                </div>
+
+
+            </div>
+
+
+<p>{{product.description}}</p>
+
+
+
+
+
+
+
+
+    
+    </div>
+
+</div>
+
+
+
+
+</div>
+<div class="container">
+
+
+
+
+
+
+<div class="row">
+<div class="col-sm-4">
+
+
+
+        <form method = 'POST'>
+                {% csrf_token %}
+    
+            {{form.as_p}}
+            
+            <input class="alert alert-success" type="submit" value="Submit">
+        
+    
+    
+    
+        </form>
+    
+
+</div>
+
+<div class="col-sm-8">
+
+
+
+        {% for comment in comments %}
+
+       <h3>{{comment.name}}</h3> 
+       <p>{{comment.content}}</p>
+    
+       <p>{{comment.created | timesince}}</p>
+
+
+       <hr>
+    
+        {% endfor %}
+    
+
+
+</div>
+
+
+       
+</div>
+</div>
+
+
+
+{% endblock body %}

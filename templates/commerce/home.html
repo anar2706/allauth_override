@@ -1,0 +1,58 @@
+{% extends 'base/base.html'  %}
+
+{% load static %}
+
+
+
+
+{% block body %}
+
+<style>
+
+    .card {
+        width: 250px;
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+        
+      }
+
+
+</style>
+<div class="container">
+
+<div class="row">
+
+
+
+{% for product in products %}
+
+
+
+<div style="margin-bottom:20px" class="col-md-4 offset-md-0 col-sm-6 offset-sm-3">
+
+
+
+    <div class="card" style="width: 18rem;">
+        <img style="max-height: 200px" class="card-img-top" src="{{product.image.url}}" alt="Card image cap">
+        <div class="card-body">
+          <h5 style="text-align: center" class="card-title">{{product.title}}</h5>
+          <p class="card-text">{{product.description | truncatewords:8}}</p>
+          <h6 class="alert alert-info" >{{product.price}} $ </h6>
+          <p>{{product.created | timesince}} ago </p>  
+          <a style="border-radius: 15%" href="{% url 'shop:detail' product.slug %}" class="btn btn-primary">Check It</a>
+        </div>
+      </div>
+    </div>
+
+
+
+
+
+
+
+
+
+
+{% endfor %}
+</div>
+</div>
+{% endblock %}
